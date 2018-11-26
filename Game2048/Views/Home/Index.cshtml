@@ -1,0 +1,36 @@
+﻿@model Game2048.Models.GameBoardViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="mainContainer">
+    <form method="post">
+        <table id="gameBoard" class="table table-hover-cells table-responsive gameBoard">
+            <tbody>
+                @for (int i = 0; i < Model.BoardSize; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < Model.BoardSize; j++)
+                        {
+                            <td>
+                                <!--Html.DisplayFor(GameBoard[i,j].value)-->
+                                @Model.Matrix[i, j]
+                            </td>
+                        }
+                    </tr>
+                }
+                <button type="submit" formaction="/action_page2.php">up</button>
+                <button type="submit" formaction="/action_page2.php">down</button>
+                <button type="submit" formaction="/action_page2.php">left</button>
+                <button type="submit" formaction="/action_page2.php">right</button>
+</table>
+
+        <!--<div class="form-group">
+            <input type="submit" value="New Game" class="btn btn-default" />
+        </div>-->
+        <!--<div class="form-group">
+            <input type="submit" value="SaveGame" class="btn btn-default" />
+        </div>-->
+    </form>
+</div>
