@@ -3,34 +3,81 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <div id="mainContainer">
     <form method="post">
-        <table id="gameBoard" class="table table-hover-cells table-responsive gameBoard">
+        <table id="gameBoard" class="table table-hover-cells table-responsive">
             <tbody>
                 @for (int i = 0; i < Model.BoardSize; i++)
                 {
-                    <tr>
+                    <tr class="row">
                         @for (int j = 0; j < Model.BoardSize; j++)
                         {
-                            <td>
+                            <td class="cell">
                                 <!--Html.DisplayFor(GameBoard[i,j].value)-->
                                 @Model.Matrix[i, j]
                             </td>
                         }
                     </tr>
                 }
-                <button type="submit" formaction="/action_page2.php">up</button>
-                <button type="submit" formaction="/action_page2.php">down</button>
-                <button type="submit" formaction="/action_page2.php">left</button>
-                <button type="submit" formaction="/action_page2.php">right</button>
-</table>
+            </tbody>
+        </table>
+    </form>
+    <!--
+    <form action="">
+        First name: <input type="text" id="txt1" onkeyup="showHint(this.value)">
+    </form>
+    <p>Suggestions: <span id="txtHint"></span></p>
+    <script>
+        function showHint(str) {
+            var xhttp;
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "gethint.asp?q=" + str, true);
+            xhttp.send();
+        }
+    </script>-->
+    <!--
+    <div class="Rtable Rtable--4cols">
+
+        <div class="Rtable-cell"><h3>Eddard Stark</h3></div>
+        <div class="Rtable-cell">Has a sword named Ice</div>
+        <div class="Rtable-cell">No direwolf</div>
+        <div class="Rtable-cell"><strong>Lord of Winterfell</strong></div>
+
+        <div class="Rtable-cell"><h3>Jon Snow</h3></div>
+        <div class="Rtable-cell">Has a sword named Longclaw</div>
+        <div class="Rtable-cell">Direwolf: Ghost</div>
+        <div class="Rtable-cell"><strong>Knows nothing</strong></div>
+
+        <div class="Rtable-cell"><h3>Arya Stark</h3></div>
+        <div class="Rtable-cell">Has a sword named Needle</div>
+        <div class="Rtable-cell">Direwolf: Nymeria</div>
+        <div class="Rtable-cell"><strong>No one</strong></div>
+
+    </div>-->
+
+
+
+</div>
+
+<button type="submit" onclick="Swipe()">up</button>
+<button type="submit"onclick="Swipe()">down</button>
+<button type="submit" onclick="Swipe()">left</button>
+<button type="submit" onclick="Swipe()">right</button>
+        
 
         <!--<div class="form-group">
-            <input type="submit" value="New Game" class="btn btn-default" />
-        </div>-->
+        <input type="submit" value="New Game" class="btn btn-default" />
+    </div>-->
         <!--<div class="form-group">
-            <input type="submit" value="SaveGame" class="btn btn-default" />
-        </div>-->
-    </form>
-</div>
+        <input type="submit" value="SaveGame" class="btn btn-default" />
+    </div>-->
+    

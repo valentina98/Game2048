@@ -7,9 +7,10 @@ namespace Game2048.Models
 {
     public class GameBoardViewModel
     {
-        public int BoardSize { get; set; } = 4;
+        public int BoardSize { get; set; } = 4; //
         public int[,] Matrix { get; set; }
-        public string Move { get; set; }
+        public string Move { get; set; } //
+        public int Score { get; set; }
         public bool IsFull { get; set; }
     }
 

@@ -11,7 +11,7 @@ namespace Game2048.Controllers
 {
     public class HomeController : Controller
     {
-        // declare the _gameManager interface prop
+        // declare the _gameManager interface
         private IGameManager _gameManager { get; set; }
         // the constructor sets the _gameManager
         public HomeController(IGameManager gameManager)
@@ -23,6 +23,7 @@ namespace Game2048.Controllers
         {
             var vm = new GameBoardViewModel();
             vm.Matrix =  _gameManager.InitializeMatrix();
+            //////////////////// ajax?
             return View(vm);
         }
 
@@ -32,8 +33,7 @@ namespace Game2048.Controllers
 
 
 
-
-
+       
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

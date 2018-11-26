@@ -7,7 +7,8 @@ namespace Game2048.Managers
 {
     public class GameManager : IGameManager
     {
-        const short MatrixLenght = 4;
+        public const short MatrixLenght = 4;
+        public bool IsFool { get; set; } = false;
         public int[,] InitializeMatrix()
         {
             int[,] matrix = new int[MatrixLenght, MatrixLenght]
@@ -59,7 +60,8 @@ namespace Game2048.Managers
                         digitsAreSummed = true;
                     }
                     // when digits reach their place 
-                    else if (matrix[i, j - 1] != 0) digitsAreSummed = false; // if digitsAreSummed ?
+                    else if (matrix[i, j - 1] != 0) digitsAreSummed = false; 
+                    // if digitsAreSummed ?
                 }
             }
             return matrix;
@@ -69,7 +71,7 @@ namespace Game2048.Managers
             bool digitsAreSummed;
             for (int i = 0; i < MatrixLenght; i++)
             {
-                digitsAreSummed = false; // to not fail in case of {2,2,0,4},{ 2,0,4,4},...
+                digitsAreSummed = false; 
                 for (int j = MatrixLenght-2; j >= 0; j--)
                 {
                     // when a digit can be moved

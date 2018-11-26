@@ -88,6 +88,59 @@ html, body {
     border: solid 5px;
     border-color: #776e65;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*DIV TABLE*/
+.Rtable {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 3em 0;
+    padding: 0;
+}
+.Rtable-cell {
+    box-sizing: border-box;
+    flex-grow: 1;
+    width: 100%;
+    /* Default to full width padding: 0.8em 1.2em;*/
+    overflow: hidden;
+    /* Or flex might break list-style: none;*/
+    border: solid 3px white;
+    background: slategrey;
+}
+/* Table column sizing */
+.Rtable--2cols > .Rtable-cell {
+    width: 50%;
+}
+.Rtable--3cols > .Rtable-cell {
+    width: 33.33%;
+}
+.Rtable--4cols > .Rtable-cell {
+    width: 25%;
+}
+.Rtable--5cols > .Rtable-cell {
+    width: 20%;
+}
+.Rtable--6cols > .Rtable-cell {
+    width: 16.6%;
+}
+
 /*TABLE CELLS HOVER*/
 /*.table-hover-cells > tbody > tr > th:hover,
 .table-hover-cells > tbody > tr > td:hover {
