@@ -11,31 +11,52 @@ namespace Game2048.Managers
         public bool IsFool { get; set; } = false;
         public int[,] InitializeMatrix()
         {
-            int[,] matrix = new int[MatrixLenght, MatrixLenght]
-           {
+            int[,] matrix = new int[MatrixLenght, MatrixLenght];
+           /*{
                 {0,0,0,0},
                 {0,0,0,0},
                 {0,0,0,0},
                 {0,0,0,0}
-           };
+           };*/ // not nessesary, new int creates empty arr
             AddNewDigit(matrix);
             AddNewDigit(matrix);
             return matrix;
         }
-        public int[,] AddNewDigit(int[,] matrix)
+        public int[,] AddNewDigit(int[,] matrix)  
         {
             Random rnd = new Random();
-            //if (matrix.IsEmpty)
-            do
+
+            int count = 0;
+            for (int i = 0; i < MatrixLenght; i++)
+                for (int j = 0; j < MatrixLenght; j++)
+                    if (matrix[i, j] == 0)
+                        count++;
+
+            if (count == 0)
             {
-                int I = rnd.Next(0, MatrixLenght);
-                int J = rnd.Next(0, MatrixLenght);
-                if (matrix[I, J] == 0)
+                if(CanBeSwiped(matrix)) return matrix; // if it is full but there is a possible swipe, it doesn't add a number
+                else return new int[MatrixLenght, MatrixLenght]; // if the game is over it returns an empty array 
+            }
+            
+            int rndEmptyCellNum = rnd.Next(0, count);
+            //matrix[0, 0] = rndEmptyCellNum;
+
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
                 {
-                    matrix[I, J] = GetNewValue();
-                    break;
+                    if (matrix[i, j] == 0)
+                    {
+                        if (rndEmptyCellNum == 0)
+                        {
+                            matrix[i, j] = GetNewValue();
+                            i = MatrixLenght; // breaks the outer loop
+                            break;
+                        }  
+                        else rndEmptyCellNum--;
+                    }
                 }
-            } while (true); ///// if it is full? /// I should optimize it
+            }
             return matrix;
         }
         public int[,] SwipeLeft (int[,] matrix)
@@ -146,6 +167,13 @@ namespace Game2048.Managers
                 }
             }
             return matrix;
+        }
+        public bool CanBeSwiped(int[,] matrix)
+        {
+            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
+                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
+                return false;
+            else return true;
         }
 
         /* PRIVATE METHODS */

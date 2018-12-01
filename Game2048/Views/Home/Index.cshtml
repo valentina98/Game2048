@@ -7,14 +7,17 @@
     <form method="post">
         <table id="gameBoard" class="table table-hover-cells table-responsive">
             <tbody>
+
                 @for (int i = 0; i < Model.BoardSize; i++)
                 {
                     <tr class="row">
                         @for (int j = 0; j < Model.BoardSize; j++)
                         {
                             <td class="cell">
-                                <!--Html.DisplayFor(GameBoard[i,j].value)-->
-                                @Model.Matrix[i, j]
+                                @if (@Model.Matrix[i, j] != 0)
+                                {
+                                    @Model.Matrix[i, j]
+                                }
                             </td>
                         }
                     </tr>
@@ -68,16 +71,50 @@
 
 </div>
 
-<button type="submit" onclick="Swipe()">up</button>
-<button type="submit"onclick="Swipe()">down</button>
-<button type="submit" onclick="Swipe()">left</button>
-<button type="submit" onclick="Swipe()">right</button>
-        
+<button type="submit" onclick="SwipeUp()">up</button>
+<button type="submit" onclick="SwipeDown()">down</button>
+<button type="submit" onclick="SwipeLeft()">left</button>
+<button type="submit" onclick="SwipeRight()">right</button>
+<!--add ajax func that call the GM swipe func-->
 
-        <!--<div class="form-group">
-        <input type="submit" value="New Game" class="btn btn-default" />
-    </div>-->
-        <!--<div class="form-group">
-        <input type="submit" value="SaveGame" class="btn btn-default" />
-    </div>-->
-    
+
+<!--
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>The XMLHttpRequest Object</h1>
+
+    <p id="demo">Let AJAX change this text.</p>
+
+    <button type="button" onclick="loadDoc()">Change Content</button>
+
+    <script>
+        function loadDoc() {
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                // code for modern browsers
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = "asdasd";
+                }
+            };
+            xhttp.open("GET", "ajax_info.txt", true);
+            xhttp.send();
+        }
+    </script>
+
+</body>
+</html>
+-->
+<!--<div class="form-group">
+    <input type="submit" value="New Game" class="btn btn-default" />
+</div>-->
+<!--<div class="form-group">
+    <input type="submit" value="SaveGame" class="btn btn-default" />
+</div>-->

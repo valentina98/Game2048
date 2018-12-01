@@ -22,16 +22,8 @@ namespace Game2048.Controllers
             GameManager GM = new GameManager(); 
             int[,] matrix = GM.InitializeMatrix();
 
+            GM.SwipeLeft(matrix); /////// why does it not refresh the view?
 
-
-            //matrix = GM.SwipeLeft(matrix);
-            //Thread.Sleep(3000);
-            /*switch (Console.ReadKey().Key)
-            {
-                case ConsoleKey.LeftArrow:
-                    GM.SwipeLeft(matrix);
-                    break;
-            }*/
             return matrix;
         }
 
