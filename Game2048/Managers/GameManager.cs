@@ -34,8 +34,12 @@ namespace Game2048.Managers
 
             if (count == 0)
             {
-                if(CanBeSwiped(matrix)) return matrix; // if it is full but there is a possible swipe, it doesn't add a number
-                else return new int[MatrixLenght, MatrixLenght]; // if the game is over it returns an empty array 
+                if (CanBeSwiped(matrix)) return matrix; // if it is full but there is a possible swipe, it doesn't add a number
+                else
+                {
+                    GameOver();
+                    return new int[MatrixLenght, MatrixLenght]; // if the game is over it returns an empty array 
+                }
             }
             
             int rndEmptyCellNum = rnd.Next(0, count);
@@ -168,14 +172,30 @@ namespace Game2048.Managers
             }
             return matrix;
         }
-        public bool CanBeSwiped(int[,] matrix)
+        
+        public int FindScore (int[,] matrix)
         {
-            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
-                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
-                return false;
-            else return true;
+            int score = 0;
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
+                {
+                    if (matrix[i, j]>score)
+                    {
+                        score = matrix[i, j];
+                    }
+                }
+            }
+            return score;
         }
+        public void GameOver()
+        {
 
+        }
+        public void GameWin()
+        {
+
+        }
         /* PRIVATE METHODS */
         private int GetNewValue()
         {
@@ -190,6 +210,13 @@ namespace Game2048.Managers
             sq = sq1;
             sq1 = sq2;
             sq2 = sq;
+        }
+        private bool CanBeSwiped(int[,] matrix)
+        {
+            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
+                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
+                return false;
+            else return true;
         }
     }
 }

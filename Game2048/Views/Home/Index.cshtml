@@ -3,21 +3,24 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="wrapper" id="mainContainer">
-    <div id="data">
-        <div id="score">
+<div class="wrapper mainContainer">
+    <div class="data">
+        <div class="score" id="score">
             Score<br />
-            <span>_</span>
+                 <span>@Model.Score</span>
         </div>
-        <div id="best">
+        <div class="best" id="best">
             Best <br />
-            <span>_</span>
+                 <span>@Model.BestScore</span>
         </div>
-        <button type="submit" class="button" id="new-game" onclick="NewGame()">New Game</button>
+        <button type="submit" class="button new-game" id="newGame" onclick="NewGame()">New Game</button>
+        <div class="game-over"> Game Over! </div>
     </div>
+    
+
     <form method="post">
 
-        <table id="game-matrix">
+        <table class="game-matrix">
             <tbody>
                 @for (int i = 0; i < Model.BoardSize; i++)
                 {
@@ -40,13 +43,13 @@
     </form>
     
 
-    <div id="buttons">
-        <button type="submit" class="button" onclick="SwipeUp()">up</button>
+    <div class="buttons">
+        <button type="submit" class="button swipe-up" id="swipeUp"onclick="SwipeUp()">up</button>
         <br />
-        <button type="submit" class="button" onclick="SwipeLeft()">left</button>
-        <button type="submit" class="button" onclick="SwipeRight()">right</button>
+        <button type="submit" class="button swipe-left" id="swipeLeft" onclick="SwipeLeft()">left</button>
+        <button type="submit" class="button swipe-right" id="swipeRight" onclick="SwipeRight()">right</button>
         <br />
-        <button type="submit" class="button" onclick="SwipeDown()">down</button>
+        <button type="submit" class="button swipe-down" id="swipeDown" onclick="SwipeDown()">down</button>
     </div>
 </div>
     <!--add ajax func that call the GM swipe func------------------------------->

@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-/**************swipes event listener */
+/**************swipes event listener 
 function SwipeLeft() {
     var xhttp = new XMLHttpRequest();
     
@@ -19,7 +19,37 @@ function SwipeLeft() {
     };
     xhttp.open("GET", "GameBoardViewModel.cs", true);
     xhttp.send();
+}*/
+
+//$('#swipeLeft').click(function () { document.location = '@Url.Action("SwipeLeft","GameBoardController")'; });
+
+$('#swipeRight').click(function () { document.location = '@Url.Action("SwipeRight","GameBoardController")'; });
+
+$('#swipeUp').click(function () { document.location = '@Url.Action("SwipeUp","GameBoardController")'; });
+
+$('#swipeDown').click(function () { document.location = '@Url.Action("SwipeDown","GameBoardController")'; });
+
+$('#newGame').click(function () { document.location = '@Url.Action("NewGame","GameBoardController")'; });
+
+function SwipeLeft() {
+$.ajax({
+    type: "POST",
+    url: "/GameBoardController/SwipeLeft", // the URL of the controller action method
+    data: null, // optional data
+    success: function (result) {
+        // do something with result
+        alert("Hello! I am an alert box!");
+    },
+    error: function (req, status, error) {
+        // do something with error   
+    }
+});
 }
+
+
+
+
+
 /*
 window.onload = function () {
     alert("Hello! I am an alert box!");

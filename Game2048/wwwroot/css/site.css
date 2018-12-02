@@ -61,11 +61,11 @@ body {
     background-color: #faf8ef;
 }
 
-    #mainContainer {
+    .mainContainer {
     margin: 75px auto;
     position: relative;
     }
-    #game-matrix {
+    .game-matrix {
         width: 40%;
         margin: 0 auto;
         background-color: #bbada0; /*#776e65*/
@@ -76,21 +76,21 @@ body {
         border-spacing: 10px;
     }
 
-        #game-matrix tr {
+        .game-matrix tr {
                 width: 100%;
             }
-        #game-matrix td {
+        .game-matrix td {
             background-color: #cdc1b4; 
             border-radius: 5px;
             font-size: 30px !important; 
         }
 
 /* BUTTONS */
-#buttons {
+.buttons {
     text-align: center;
     position: absolute;
     right: 0;
-    top: 100px;/***********************why*/
+    top: 100px;
     width: 30%;
 }
 .button {
@@ -108,8 +108,8 @@ body {
     margin: 2px;
 }
 /* DATA */
-#data {
-    text-align: center;
+.data {
+    text-align: left;
     position: absolute;
     margin: auto;
     left: 0;
@@ -117,21 +117,25 @@ body {
     width: 30%;
 }
 
-#score, #best {
+.score, .best {
     display: inline-block;
+    text-align: center;
     vertical-align: middle;
     background-color: #cdc1b4;
     color: #faf8ef;
     text-decoration: none;
     font-size: 16px;
     border-radius: 5px;
-    margin: 5px 2px;
+    margin: 15px 2px;
     padding: 5px 15px;
 }
-#new-game{
+.new-game {
     width: 50%;
-    margin: auto;
     display: block;
+}
+.game-over {
+    font-size: 30px;
+    margin: 30px 0;
 }
 
 
@@ -162,7 +166,7 @@ body {
 
 /* MEDIA QUERIES */
 @media (max-width: 800px) {
-    #game-matrix {
+    .game-matrix {
         width: 80%;
     }
 
