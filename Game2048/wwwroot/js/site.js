@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+/**************swipes event listener */
 function SwipeLeft() {
     var xhttp = new XMLHttpRequest();
     
