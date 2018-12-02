@@ -123,6 +123,8 @@ namespace XUnitTestProject
             var result = GM.AddNewDigit(matrixOriginal);
             // Assert
             Assert.NotEqual(matrixOriginal, result);
+
+            //////// why fails???? 
             //////// aseert for when it is full and can/cannot be swiped
         }
     }

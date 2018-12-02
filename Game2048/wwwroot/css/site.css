@@ -53,111 +53,81 @@ table {
 }
 
 /* MY CSS */
-
-
 /*BACKGROUND*/
-html, body {
-    background: #faf8ef;
-    color: #776e65;
+body {
+    font: 30px;
     font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 18px;
+    font-weight: bold;
+    color: #776e65;
+    background-color: #faf8ef;
 }
 
-#mainContainer {
-    margin: 100px auto;
+    #mainContainer {
+    margin: 75px auto;
+    }
+    #game-matrix {
+        width: 40%;
+        margin: 0 auto;
+        background-color: #bbada0; /*#776e65*/
+        border-radius: 10px;
+    
+        /*display: table;
+      table-layout: fixed;*/
+        border-collapse: separate; /* instead of 'collapse' so that I can use border-spacing:*/
+        border-spacing: 10px;
+    }
+
+        #game-matrix tr {
+                width: 100%;
+            }
+        #game-matrix td {
+            background-color: #cdc1b4;
+            border-radius: 5px;
+        }
+
+/* HIGHT = WIDTH, THERE SHOULD BE ANOTHER BLOCK .CONTENT IN IT */
+.box {
+    position: relative;
+    width: 25%; /* DESIRED WIDTH */
 }
+
+    .box:before {
+        content: "";
+        display: block;
+        padding-top: 100%; /* INITIAL RATIO OF 1:1 */
+    }
 
 .content {
-    max-width: 500px;
-    margin: auto;
-    background: white;
-    padding: 10px;
-}
-/* TABLE STYLE*/
-#gameBoard {
-    width: 50%;
-    margin: auto;
-    border-radius: 30px; /**/
-    width: 450px;
-    height: 450px;
-}
-
-#gameBoard tr td {
-    padding: 20px;
-    background-color: #bbada0;
-    border: solid 5px;
-    border-color: #776e65;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*DIV TABLE*/
-.Rtable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* CENTERS THE NUMBERS IN THE SQUARES */
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 0 3em 0;
-    padding: 0;
-}
-.Rtable-cell {
-    box-sizing: border-box;
-    flex-grow: 1;
-    width: 100%;
-    /* Default to full width padding: 0.8em 1.2em;*/
-    overflow: hidden;
-    /* Or flex might break list-style: none;*/
-    border: solid 3px white;
-    background: slategrey;
-}
-/* Table column sizing */
-.Rtable--2cols > .Rtable-cell {
-    width: 50%;
-}
-.Rtable--3cols > .Rtable-cell {
-    width: 33.33%;
-}
-.Rtable--4cols > .Rtable-cell {
-    width: 25%;
-}
-.Rtable--5cols > .Rtable-cell {
-    width: 20%;
-}
-.Rtable--6cols > .Rtable-cell {
-    width: 16.6%;
+    justify-content: center; /* AALIGN HORIZONTAL */
+    align-items: center; /* ALIGN VERTICAL */
 }
 
-/*TABLE CELLS HOVER*/
-/*.table-hover-cells > tbody > tr > th:hover,
-.table-hover-cells > tbody > tr > td:hover {
-    background-color: #faf8ef;
+
+/* MEDIA QUERIES */
+@media (max-width: 800px) {
+    #game-matrix {
+        width: 80%;
+    }
 }
-.table-hover-cells > tbody > tr > th.active:hover,
-.table-hover-cells > tbody > tr > td.active:hover,
-.table-hover-cells > tbody > tr.active > th:hover,
-.table-hover-cells > tbody > tr.active > td:hover {
-    background-color: #faf8ef;
-}
-.table-hover.table-hover-cells > tbody > tr:hover > th:hover,
-.table-hover.table-hover-cells > tbody > tr:hover > td:hover {
-    background-color: #faf8ef;
-}
-.table-hover.table-hover-cells > tbody > tr.active:hover > th:hover,
-.table-hover.table-hover-cells > tbody > tr.active:hover > td:hover {
-    background-color: #faf8ef;
-}
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TABLE STYLE*/
