@@ -4,6 +4,43 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="wrapper mainContainer">
+
+    <form method="post">
+
+        <!--partial view-->
+        <table class="game-matrix">
+            <tbody>
+                @for (int i = 0; i < Model.BoardSize; i++)
+                {
+                <tr>
+                    @for (int j = 0; j < Model.BoardSize; j++)
+                    {
+                        <td class="box">
+                            <div class="content">
+                                @if (@Model.Matrix[i, j] != 0)
+                                {
+                                    @Model.Matrix[i, j]
+                                }
+                            </div>
+                        </td>
+
+                        <input type="hidden" value=@Model.Matrix[i, j]> <!-- hidden inputs with the values -->
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+    
+    <div class="buttons">
+        <button type="submit" class="button swipe-up" onclick="Swipe()">up</button>
+        <br />
+        <button type="submit" class="button swipe-left" onclick="Swipe()">left</button>
+        <button type="submit" class="button swipe-right" onclick="Swipe()">right</button>
+        <br />
+        <button type="submit" class="button swipe-down" onclick="Swipe()">down</button>
+    </div>
+
     <div class="data">
         <div class="score" id="score">
             Score<br />
@@ -15,44 +52,6 @@
         </div>
         <button type="submit" class="button new-game" id="newGame" onclick="NewGame()">New Game</button>
         <div class="game-over"> Game Over! </div>
-    </div>
-
-
-    <form method="post">
-
-        <!--partial view-->
-        <table class="game-matrix">
-            <tbody>
-                @for (int i = 0; i < Model.BoardSize; i++)
-                {
-                    <tr>
-                        @for (int j = 0; j < Model.BoardSize; j++)
-                        {
-                            <td class="box">
-                                <div class="content">
-                                    @if (@Model.Matrix[i, j] != 0)
-                                    {
-                                        @Model.Matrix[i, j]
-                                    }
-                                </div>
-                            </td>
-
-                            <input type="hidden" value=@Model.Matrix[i, j]>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </form>
-
-
-    <div class="buttons">
-        <button type="submit" class="button swipe-up" onclick="Swipe()">up</button>
-        <br />
-        <button type="submit" class="button swipe-left" onclick="Swipe()">left</button>
-        <button type="submit" class="button swipe-right" onclick="Swipe()">right</button>
-        <br />
-        <button type="submit" class="button swipe-down" onclick="Swipe()">down</button>
     </div>
 </div>
 

@@ -44,12 +44,17 @@ $.ajax({
 }
 
 
+
+
+
+
+
+
 /* that is working
 window.onload = function () {
     alert("Hello! I am an alert box!");
 }
 */
-
 
 //window.addEventListener("keypress", myEventHandler, false);
 /* event listener for arrow press

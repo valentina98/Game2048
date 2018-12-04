@@ -82,7 +82,7 @@ body {
         .game-matrix td {
             background-color: #cdc1b4; 
             border-radius: 5px;
-            font-size: 30px !important; 
+            font-size: 30px; 
         }
 
 /* BUTTONS */
@@ -172,8 +172,26 @@ body {
 
     .buttons {
         position: static;
-        margin: auto;
+        margin: 10px auto;
         width: 50%;
+    }
+    .data {
+        position: static;
+        width: 100%;
+    }
+    .score, .best {
+        display: inline-block;
+        margin: 1%;
+        width: 30%;
+    }
+
+    .new-game {
+        width: 30%;
+        display: inline-block;
+    }
+
+    .game-over {
+        text-align: center;
     }
 }
 
