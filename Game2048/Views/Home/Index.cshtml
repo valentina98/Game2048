@@ -7,19 +7,20 @@
     <div class="data">
         <div class="score" id="score">
             Score<br />
-                 <span>@Model.Score</span>
+            <span>@Model.Score</span>
         </div>
         <div class="best" id="best">
             Best <br />
-                 <span>@Model.BestScore</span>
+            <span>@Model.BestScore</span>
         </div>
         <button type="submit" class="button new-game" id="newGame" onclick="NewGame()">New Game</button>
         <div class="game-over"> Game Over! </div>
     </div>
-    
+
 
     <form method="post">
 
+        <!--partial view-->
         <table class="game-matrix">
             <tbody>
                 @for (int i = 0; i < Model.BoardSize; i++)
@@ -35,61 +36,90 @@
                                     }
                                 </div>
                             </td>
+
+                            <input type="hidden" value=@Model.Matrix[i, j]>
                         }
                     </tr>
                 }
             </tbody>
         </table>
     </form>
-    
+
 
     <div class="buttons">
-        <button type="submit" class="button swipe-up" id="swipeUp"onclick="SwipeUp()">up</button>
+        <button type="submit" class="button swipe-up" onclick="Swipe()">up</button>
         <br />
-        <button type="submit" class="button swipe-left" id="swipeLeft" onclick="SwipeLeft()">left</button>
-        <button type="submit" class="button swipe-right" id="swipeRight" onclick="SwipeRight()">right</button>
+        <button type="submit" class="button swipe-left" onclick="Swipe()">left</button>
+        <button type="submit" class="button swipe-right" onclick="Swipe()">right</button>
         <br />
-        <button type="submit" class="button swipe-down" id="swipeDown" onclick="SwipeDown()">down</button>
+        <button type="submit" class="button swipe-down" onclick="Swipe()">down</button>
     </div>
 </div>
-    <!--add ajax func that call the GM swipe func------------------------------->
-    <!--
-    <!DOCTYPE html>
-    <html>
-    <body>
 
-        <h1>The XMLHttpRequest Object</h1>
 
-        <p id="demo">Let AJAX change this text.</p>
 
-        <button type="button" onclick="loadDoc()">Change Content</button>
 
-        <script>
-            function loadDoc() {
-                var xhttp;
-                if (window.XMLHttpRequest) {
-                    // code for modern browsers
-                    xhttp = new XMLHttpRequest();
-                } else {
-                    // code for IE6, IE5
-                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("demo").innerHTML = "asdasd";
-                    }
-                };
-                xhttp.open("GET", "ajax_info.txt", true);
-                xhttp.send();
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<button onclick="myFunction()">Click me</button>
+
+<script>
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "Hello World";
+    }
+</script>
+
+<p id="demo"></p>-->
+
+
+<!--add ajax func that call the GM swipe func------------------------------->
+<!--
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>The XMLHttpRequest Object</h1>
+
+    <p id="demo">Let AJAX change this text.</p>
+
+    <button type="button" onclick="loadDoc()">Change Content</button>
+
+    <script>
+        function loadDoc() {
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                // code for modern browsers
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-        </script>
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = "asdasd";
+                }
+            };
+            xhttp.open("GET", "ajax_info.txt", true);
+            xhttp.send();
+        }
+    </script>
 
-    </body>
-    </html>
-    -->
-    <!--<div class="form-group">
-        <input type="submit" value="New Game" class="btn btn-default" />
-    </div>-->
-    <!--<div class="form-group">
-        <input type="submit" value="SaveGame" class="btn btn-default" />
-    </div>-->
+</body>
+</html>
+-->
+<!--<div class="form-group">
+    <input type="submit" value="New Game" class="btn btn-default" />
+</div>-->
+<!--<div class="form-group">
+    <input type="submit" value="SaveGame" class="btn btn-default" />
+</div>-->
