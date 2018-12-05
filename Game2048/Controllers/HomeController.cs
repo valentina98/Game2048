@@ -18,12 +18,19 @@ namespace Game2048.Controllers
         {
             _gameManager = gameManager;
         }
-        GameBoardViewModel GBVM = new GameBoardViewModel();
+        GameBoardViewModel GBVM;
+        
 
         
         public ActionResult Index()
         {
-            GBVM.Matrix = _gameManager.InitializeMatrix();
+            if (HttpContext.Session["GameBoard"] == null)
+            {
+                GBVM.Matrix = _gameManager.InitializeMatrix();
+                HttpContext.Session["GameBoard"] = GBVM;
+            }
+            else
+                GBVM = (int[,]HttpContext.Session["GameBoard"])
 
             return View(GBVM);
         }
@@ -52,7 +59,8 @@ namespace Game2048.Controllers
             //for (int i = 0; i < GBVM.BoardSize; i++)
             //    for (int j = 0; j < GBVM.BoardSize; j++)
             //        matrix[i, j] = cellValArr[i + j];
-            
+            GBVM = (int[,])HttpContext.Session["GameBoard"]);
+
             switch (direction)
             {
                 case "up":
@@ -86,11 +94,23 @@ namespace Game2048.Controllers
 
             GBVM.State = outcome;
 
-            var model = await this.UpdateGameBoard(); //////////????????
-
+            HttpContext.Session["GameBoard"] = GBVM;
+            
             return PartialView("_GameBoard", GBVM);
         }
 
+        [HttpPost]
+        public ActionResult NewGame()
+        {
+            GBVM.Matrix = _gameManager.InitializeMatrix();
+            if (GBVM.BestScore < GBVM.Score)
+                GBVM.BestScore = GBVM.Score;
+            
+            HttpContext.Session["GameBoard"] = GBVM;
+
+            return PartialView("_GameBoard", GBVM);
+        }
+  
 
 
         public IActionResult About()

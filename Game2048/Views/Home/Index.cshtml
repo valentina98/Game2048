@@ -6,7 +6,9 @@
 <div class="wrapper mainContainer">
 
 
-    @{await Html.RenderPartialAsync("_GameBoard", Model);} <!--Html.RenderPartial-->
+    <div id="gameBoard">
+        @{await Html.RenderPartialAsync("_GameBoard", Model);} <!--Html.RenderPartial-->
+    </div>
 
     <div class="data">
         <div class="score" id="score">
@@ -17,8 +19,8 @@
             Best <br />
             <span>@Model.BestScore</span>
         </div>
-        <button type="submit" class="button new-game" id="newgame">New Game</button>
-        <div class="game-over"> Game Over! </div>
+        <button type="submit" class="button new-game" id="new-game">New Game</button>
+        <div class="game-over" id="message-box"> Game Over! </div>
     </div>
 
     <div class="buttons">

@@ -3,13 +3,13 @@
 
 $(".swipe").click(function () {
     var direction = $(this).text();;
-    //alert("your direction is : " + direction);
+    alert("your direction is : " + direction);
     $.ajax({
         type: "post",
         url: "/home/swipe",
         data: '{name: "' + direction + '" }',
         success: function (response) {
-            alert("response: " + direction);
+            ("$gameBoard").html(response); //////////
         },
         failure: function (response) {
             alert("fail");
@@ -21,21 +21,19 @@ $(".swipe").click(function () {
 })
 
 
-
-
-
-
-$("#newgame").click(function () {
-    alert(" should invoke NewGame method from the controller which will reset te inputs and the game; should refresh a partial view of the matrix");
+$("#new-game").click(function () {
     $.ajax({
-        type: "POST",
-        url: "/GameBoardController/SwipeLeft", // the URL of the controller action method
-        data: null, // optional data
-        success: function (result) {
-            // do something with result
+        type: "post",
+        url: "/home/newgame",
+        success: function (response) {
+            //$("#message-box").text("New Game");
+            alert("New Game!");
         },
-        error: function (req, status, error) {
-            // do something with error   
+        failure: function (response) {
+            alert("fail");
+        },
+        error: function (response) {
+            alert("error");
         }
     });
 })
