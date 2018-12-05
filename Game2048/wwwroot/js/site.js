@@ -13,17 +13,36 @@ $('#newGame').click(function () { document.location = '@Url.Action("NewGame","Ga
 
 
 $(".swipe").click(function () {
-    
     $.ajax({
-        url: "HomeController",
         type: "POST",
-        // i'm trying to pass the value of the button "up", "down"...
-        data: { direction: this.val() }, 
+        url: "/Home/Swipe",
+        data: '{name: "' + $("#input").val() + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         success: function (response) {
-            alert(" alert ");
+            alert("success");
+        },
+        failure: function (response) {
+            alert("fail");
+        },
+        error: function (response) {
+            alert("error");
         }
     });
 })
+
+//$(".swipe").click(function () {
+    
+//    $.ajax({
+//        url: "HomeController",
+//        type: "POST",
+//        // i'm trying to pass the value of the button "up", "down"...
+//        data: { direction: this.val() }, 
+//        success: function (response) {
+//            alert(" alert ");
+//        }
+//    });
+//})
 
 
 //$(".swipe").click(function () {

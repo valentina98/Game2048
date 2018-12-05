@@ -45,7 +45,7 @@ namespace Game2048.Controllers
 
         
         [HttpPost]
-        public async Task<ActionResult> Index( string direction = null)
+        public JsonResult Swipe( string direction = null)
         {//List<int> cellValues,
             //int[] cellValArr = cellValues.ToArray();
             //int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
@@ -85,7 +85,7 @@ namespace Game2048.Controllers
                     outcome = _gameManager.GameOver();
 
             GBVM.State = outcome;
-            return PartialView("_GameBoard", GBVM);
+            return Json(GBVM);
         }
 
 
