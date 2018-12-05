@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Game2048.Models.GameBoardViewModel
+
+<form method="post">
+
+    <!--partial view-->
+    <table class="game-matrix">
+        <tbody>
+            @for (int i = 0; i < Model.BoardSize; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < Model.BoardSize; j++)
+                    {
+                        <td class="box">
+                            <div class="content boardcell">
+                                @if (@Model.Matrix[i, j] != 0)
+                                {
+                                    @Model.Matrix[i, j]
+                                }
+                            </div>
+                        </td>
+
+                        <input type="hidden" value=@Model.Matrix[i, j]> <!-- hidden inputs with the values -->
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+<div class="data">
+    <div class="score" id="score">
+        Score<br />
+        <span>@Model.Score</span>
+    </div>
+    <div class="best" id="best">
+        Best <br />
+        <span>@Model.BestScore</span>
+    </div>
+    <button type="submit" class="button new-game" id="newgame">New Game</button>
+    <div class="game-over"> Game Over! </div>
+</div>

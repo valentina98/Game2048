@@ -19,21 +19,41 @@ namespace Game2048.Controllers
             _gameManager = gameManager;
         }
         // when opened index page
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            var vm = new GameBoardViewModel();
-            vm.Matrix =  _gameManager.InitializeMatrix();
-            //////////////////// ajax?
+            var vm = await this.GetGameBoardViewModel();
             return View(vm);
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetCellValues() // should be a liststring cell
+        {
+            //var cellVal = int.Parse(cell);
+            var model = await this.GetGameBoardViewModel();//cellVal
+            return PartialView("_GameBoard", model);
+        }
+        private async Task<GameBoardViewModel> GetGameBoardViewModel() //int cellVal = 0
+        {
+            var fullAndPartialViewModel = new GameBoardViewModel(); //shouldn't be a new one
+            fullAndPartialViewModel.Matrix = _gameManager.InitializeMatrix();
+            // populate the viewModel and return it
+            return fullAndPartialViewModel;
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateVM(GameBoardViewModel model)
+        {
+            var view = GetCellValues();
+
+
+            return View(view);
         }
 
 
 
 
 
-
-
-       
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
