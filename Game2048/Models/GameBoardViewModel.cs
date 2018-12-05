@@ -11,6 +11,7 @@ namespace Game2048.Models
         public int[,] Matrix { get; set; }
         public int Score { get; set; } = 0;
         public int BestScore { get; set; } = 0;
+        public string State { get; set; } = "";
     }
 
 }

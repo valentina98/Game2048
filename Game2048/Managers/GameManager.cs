@@ -26,21 +26,7 @@ namespace Game2048.Managers
         {
             Random rnd = new Random();
 
-            int count = 0;
-            for (int i = 0; i < MatrixLenght; i++)
-                for (int j = 0; j < MatrixLenght; j++)
-                    if (matrix[i, j] == 0)
-                        count++;
-
-            if (count == 0)
-            {
-                if (CanBeSwiped(matrix)) return matrix; // if it is full but there is a possible swipe, it doesn't add a number
-                else
-                {
-                    GameOver();
-                    return new int[MatrixLenght, MatrixLenght]; // if the game is over it returns an empty array 
-                }
-            }
+            int count = GetNumEmptyCells(matrix);
             
             int rndEmptyCellNum = rnd.Next(0, count);
             //matrix[0, 0] = rndEmptyCellNum;
@@ -172,7 +158,6 @@ namespace Game2048.Managers
             }
             return matrix;
         }
-        
         public int FindScore (int[,] matrix)
         {
             int score = 0;
@@ -188,13 +173,29 @@ namespace Game2048.Managers
             }
             return score;
         }
-        public void GameOver()
+        public string GameOver()
         {
-
+            return "Game Over!";
         }
-        public void GameWin()
+        public string Win()
         {
-
+            return "You won!";
+        }
+        public bool CanBeSwiped(int[,] matrix)
+        {
+            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
+                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
+                return false;
+            else return true;
+        }
+        public int GetNumEmptyCells(int[,] matrix)
+        {
+            int count = 0;
+            for (int i = 0; i < MatrixLenght; i++)
+                for (int j = 0; j < MatrixLenght; j++)
+                    if (matrix[i, j] == 0)
+                        count++;
+            return count;
         }
         /* PRIVATE METHODS */
         private int GetNewValue()
@@ -211,12 +212,6 @@ namespace Game2048.Managers
             sq1 = sq2;
             sq2 = sq;
         }
-        private bool CanBeSwiped(int[,] matrix)
-        {
-            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
-                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
-                return false;
-            else return true;
-        }
+        
     }
 }

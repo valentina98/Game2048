@@ -72,6 +72,19 @@ namespace Game2048.Controllers
                     GBVM.Matrix = _gameManager.InitializeMatrix();
                     break;
             }
+            GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
+            string outcome = "";
+            if (GBVM.Score >= 2048)
+            {
+                outcome = _gameManager.Win();
+            }
+
+            int count = _gameManager.GetNumEmptyCells(GBVM.Matrix);
+            if (count == 0)
+                if (_gameManager.CanBeSwiped(GBVM.Matrix))
+                    outcome = _gameManager.GameOver();
+
+            GBVM.State = outcome;
             return PartialView("_GameBoard", GBVM);
         }
 
