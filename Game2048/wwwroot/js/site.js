@@ -15,8 +15,8 @@ $('#newGame').click(function () { document.location = '@Url.Action("NewGame","Ga
 $(".swipe").click(function () {
     
     $.ajax({
-        url: "homecontroller",
-        type: "post",
+        url: "HomeController",
+        type: "POST",
         // i'm trying to pass the value of the button "up", "down"...
         data: { direction: this.val() }, 
         success: function (response) {
