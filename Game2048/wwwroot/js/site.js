@@ -1,26 +1,15 @@
-﻿/* this would refresh the whole page
-$('#swipeLeft').click(function () { document.location = '@Url.Action("SwipeLeft","GameBoardController")'; });
-$('#swipeRight').click(function () { document.location = '@Url.Action("SwipeRight","GameBoardController")'; });
-$('#swipeUp').click(function () { document.location = '@Url.Action("SwipeUp","GameBoardController")'; });
-$('#swipeDown').click(function () { document.location = '@Url.Action("SwipeDown","GameBoardController")'; });
-$('#newGame').click(function () { document.location = '@Url.Action("NewGame","GameBoardController")'; });
-*/
-
-
-//$(".swipe").click(function () { document.location = '@Url.Action("Index","HomeController")'; });
-
-
-
+﻿
+//https://www.aspsnippets.com/Articles/ASPNet-MVC-Call-Controller-Method-from-View-using-jQuery-AJAX.aspx
 
 $(".swipe").click(function () {
+    var direction = $(this).text();;
+    //alert("your direction is : " + direction);
     $.ajax({
-        type: "POST",
-        url: "/Home/Swipe",
-        data: '{name: "' + $("#input").val() + '" }',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        type: "post",
+        url: "/home/swipe",
+        data: '{name: "' + direction + '" }',
         success: function (response) {
-            alert("success");
+            alert("response: " + direction);
         },
         failure: function (response) {
             alert("fail");
@@ -31,36 +20,6 @@ $(".swipe").click(function () {
     });
 })
 
-//$(".swipe").click(function () {
-    
-//    $.ajax({
-//        url: "HomeController",
-//        type: "POST",
-//        // i'm trying to pass the value of the button "up", "down"...
-//        data: { direction: this.val() }, 
-//        success: function (response) {
-//            alert(" alert ");
-//        }
-//    });
-//})
-
-
-//$(".swipe").click(function () {
-//    var txt = $("input").val();
-//    $.post("HomeController/Index",
-//        { direction: txt });
-//}
-
-
-
-
-
-
-/*
-$(".swipe").click(function () {
-    $(".swipe").load('@(Url.Action("Index","HomeController");
-    //,null, Request.Url.Scheme))?categoryId=' + categoryId
-})*/
 
 
 

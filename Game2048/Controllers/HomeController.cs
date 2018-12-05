@@ -29,23 +29,23 @@ namespace Game2048.Controllers
         }
 
         ///********************************/
-        //// https://cmatskas.com/update-an-mvc-partial-view-with-ajax/
-        //[HttpGet]
-        //public async Task<ActionResult> UpdateGameBoard()
-        //{
-        //    GBVM = await this.FullAndPartialViewModel();
-        //    return PartialView("_GameBoard", GBVM);
-        //}
-        //private async Task<GameBoardViewModel> FullAndPartialViewModel(int[,] matrix = null) // optional array param
-        //{
-        //    // populate the viewModel and return it
-        //    return GBVM;
-        //}
+        // https://cmatskas.com/update-an-mvc-partial-view-with-ajax/
+        [HttpGet]
+        public async Task<ActionResult> UpdateGameBoard()
+        {
+            GBVM = await this.FullAndPartialViewModel();
+            return PartialView("_GameBoard", GBVM);
+        }
+        private async Task<GameBoardViewModel> FullAndPartialViewModel(int[,] matrix = null) // optional array param
+        {
+            // populate the viewModel and return it
+            return GBVM;
+        }
         ///********************************/
 
-        
+
         [HttpPost]
-        public JsonResult Swipe( string direction = null)
+        public async Task<ActionResult> Swipe( string direction = null)
         {//List<int> cellValues,
             //int[] cellValArr = cellValues.ToArray();
             //int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
@@ -85,7 +85,10 @@ namespace Game2048.Controllers
                     outcome = _gameManager.GameOver();
 
             GBVM.State = outcome;
-            return Json(GBVM);
+
+            var model = await this.UpdateGameBoard(); //////////????????
+
+            return PartialView("_GameBoard", GBVM);
         }
 
 
