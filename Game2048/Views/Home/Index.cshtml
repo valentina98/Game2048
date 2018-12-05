@@ -5,15 +5,29 @@
 
 <div class="wrapper mainContainer">
 
+
     @{await Html.RenderPartialAsync("_GameBoard", Model);} <!--Html.RenderPartial-->
+
+    <div class="data">
+        <div class="score" id="score">
+            Score<br />
+            <span>@Model.Score</span>
+        </div>
+        <div class="best" id="best">
+            Best <br />
+            <span>@Model.BestScore</span>
+        </div>
+        <button type="submit" class="button new-game" id="newgame">New Game</button>
+        <div class="game-over"> Game Over! </div>
+    </div>
 
     <div class="buttons">
         <button type="submit" class="button swipe-up swipe" value="up">up</button>
         <br />
         <button type="submit" class="button swipe-left swipe" value="left">left</button>
-        <button type="submit" class="button swipe-right swipe" value="up"right">right</button>
+        <button type="submit" class="button swipe-right swipe" value="up" right">right</button>
         <br />
-        <button type="submit" class="button swipe-down swipe" value="down"">down</button>
+        <button type="submit" class="button swipe-down swipe" value="down" ">down</button>
     </div>
 
 </div>

@@ -17,17 +17,15 @@ $(".swipe").click(function () {
     $.ajax({
         url: "GameBoard",
         type: "POST",    
-        data: {
-            date: this.val()
-        },
+        data: { direction: this.val() },
         success: function (response) {
             $("#check").html(response)
         }
     });
-})
+})/*
 $(".swipe").click(function () {
     $("#dvCategoryResults").load('@(Url.Action("GetCategoryProducts","Home",null, Request.Url.Scheme))?categoryId=' + categoryId);
-})
+})*/
 
 
 $("#newgame").click(function () {
