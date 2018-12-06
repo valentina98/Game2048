@@ -80,7 +80,7 @@ namespace XUnitTestProject
             // Assert
             Assert.Equal(matrixChanged, result);
         }
-        /*
+        
         [Fact]
         public void SwipingDown()
         {
@@ -105,7 +105,7 @@ namespace XUnitTestProject
             // Assert
             Assert.Equal(matrixChanged, result);
         }
-        [Fact]
+        /*[Fact]
         public void AddingNewDigit()
         {
             // Arrange

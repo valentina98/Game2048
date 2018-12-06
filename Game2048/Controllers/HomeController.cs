@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Game2048.Models;
 using Game2048.Managers;
+using Microsoft.AspNetCore.Http; // Needed for the SetString and GetString extension methods
 
 namespace Game2048.Controllers
 {
     public class HomeController : Controller
     {
+
+        void Session() { }
         // declare the _gameManager interface
         private IGameManager _gameManager { get; set; }
         // the constructor sets the _gameManager
@@ -23,17 +26,26 @@ namespace Game2048.Controllers
         
         public ActionResult Index()
         {
+            //HttpContext.Session.SetString("Gameboard", "Ben Rules!");
 
-            //HttpContext.Session["GameBoard"] = "come oon";
-
-            //if (HttpContext.Session["GameBoard"] == null)
+            //if (HttpContext.Session.GetString("GameBoard") == null)
             //{
             //    GBVM.Matrix = _gameManager.InitializeMatrix();
-            //    HttpContext.Session["GameBoard"] = GBVM;
-            //}
-            //else
-            //    GBVM = (int[,])HttpContext.Session["GameBoard"];
-            GBVM.Matrix = _gameManager.InitializeMatrix();
+            //    //HttpContext.Session.SetString("GameBoard", GBVM)
+            //    }
+            //    //else
+            //        //GBVM = (int[,])HttpContext.Session["GameBoard"];
+
+
+                //HttpContext.Session["GameBoard"] = "come oon";
+                //if (HttpContext.Session["GameBoard"] == null)
+                //{
+                //    GBVM.Matrix = _gameManager.InitializeMatrix();
+                //    HttpContext.Session["GameBoard"] = GBVM;
+                //}
+                //else
+                //    GBVM = (int[,])HttpContext.Session["GameBoard"];
+                GBVM.Matrix = _gameManager.InitializeMatrix();
             return View(GBVM);
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Game2048.Models
 {
+    //[Serializable]
     public class GameBoardViewModel
     {
         public int BoardSize { get; set; } = 4; // I use it for the html helpers
