@@ -28,15 +28,6 @@ namespace Game2048.Controllers
         public ActionResult Index()
         {
 
-            if (_session.GetString("GameBoard") == null)
-            {
-                HttpContext.Session.SetString("Test", "Ben Rules!");
-            }
-            else
-            {
-                ViewBag.Message = HttpContext.Session.GetString("Test");
-            }
-            //_session.SetString("Test", "Ben Rules!");
             GameBoardViewModel GBVM;
             if (_session.GetString("GameBoard") == null)
             {
@@ -77,12 +68,7 @@ namespace Game2048.Controllers
 
         [HttpPost]
         public ActionResult Swipe( string direction = null) //async Task<ActionResult>
-        {//List<int> cellValues,
-            //int[] cellValArr = cellValues.ToArray();
-            //int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
-            //for (int i = 0; i < GBVM.BoardSize; i++)
-            //    for (int j = 0; j < GBVM.BoardSize; j++)
-            //        matrix[i, j] = cellValArr[i + j];
+        {
             GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
 
             switch (direction)
@@ -186,3 +172,10 @@ namespace Game2048.Controllers
     //    }
     //}
 }
+
+//List<int> cellValues,
+//int[] cellValArr = cellValues.ToArray();
+//int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
+//for (int i = 0; i < GBVM.BoardSize; i++)
+//    for (int j = 0; j < GBVM.BoardSize; j++)
+//        matrix[i, j] = cellValArr[i + j];
