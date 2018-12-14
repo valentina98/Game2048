@@ -9,7 +9,7 @@ $(".swipe").click(function () {
         url: "/home/swipe",
         data: '{name: "' + direction + '" }',
         success: function (response) {
-            ("$gameBoard").html(response); //////////
+            ("$gameBoard").html(response);
         },
         failure: function (response) {
             alert("fail");

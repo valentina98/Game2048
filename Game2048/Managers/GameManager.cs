@@ -71,8 +71,11 @@ namespace Game2048.Managers
                         digitsAreSummed = true;
                     }
                     // when digits reach their place 
-                    else if (matrix[i, j - 1] != 0) digitsAreSummed = false; 
-                    // if digitsAreSummed ?
+                    else if (matrix[i, j - 1] != 0)
+                    {
+                        digitsAreSummed = false;
+                        // if digitsAreSummed ?
+                    }
                 }
             }
             return matrix;

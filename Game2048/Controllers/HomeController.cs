@@ -7,75 +7,83 @@ using Microsoft.AspNetCore.Mvc;
 using Game2048.Models;
 using Game2048.Managers;
 using Microsoft.AspNetCore.Http; // Needed for the SetString and GetString extension methods
+using Newtonsoft.Json;
 
 namespace Game2048.Controllers
 {
     public class HomeController : Controller
     {
-
-        void Session() { }
         // declare the _gameManager interface
         private IGameManager _gameManager { get; set; }
-        // the constructor sets the _gameManager
-        public HomeController(IGameManager gameManager)
+        //
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
+        // the constructor injects _gameManager and _httpContextAccessor
+        public HomeController(IGameManager gameManager, IHttpContextAccessor httpContextAccessor)
         {
             _gameManager = gameManager;
+            _httpContextAccessor = httpContextAccessor;
         }
-        GameBoardViewModel GBVM = new GameBoardViewModel();  // should use session instead
 
-        
         public ActionResult Index()
         {
-            //HttpContext.Session.SetString("Gameboard", "Ben Rules!");
 
-            //if (HttpContext.Session.GetString("GameBoard") == null)
-            //{
-            //    GBVM.Matrix = _gameManager.InitializeMatrix();
-            //    //HttpContext.Session.SetString("GameBoard", GBVM)
-            //    }
-            //    //else
-            //        //GBVM = (int[,])HttpContext.Session["GameBoard"];
-
-
-                //HttpContext.Session["GameBoard"] = "come oon";
-                //if (HttpContext.Session["GameBoard"] == null)
-                //{
-                //    GBVM.Matrix = _gameManager.InitializeMatrix();
-                //    HttpContext.Session["GameBoard"] = GBVM;
-                //}
-                //else
-                //    GBVM = (int[,])HttpContext.Session["GameBoard"];
+            if (_session.GetString("GameBoard") == null)
+            {
+                HttpContext.Session.SetString("Test", "Ben Rules!");
+            }
+            else
+            {
+                ViewBag.Message = HttpContext.Session.GetString("Test");
+            }
+            //_session.SetString("Test", "Ben Rules!");
+            GameBoardViewModel GBVM;
+            if (_session.GetString("GameBoard") == null)
+            {
+                GBVM = new GameBoardViewModel();
                 GBVM.Matrix = _gameManager.InitializeMatrix();
+                _session.SetObjectAsJson("GameBoard", GBVM);
+            }
+            else
+            {
+                //https://stackoverflow.com/questions/44192365/jsonconvert-deserializeobjectienumerablebook
+                var value = _session.GetString("GameBoard");
+                var deserializedIenum = JsonConvert.DeserializeObject<IEnumerable<GameBoardViewModel>>(value);
+                GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+            }
             return View(GBVM);
         }
 
         ///********************************/
-        // https://cmatskas.com/update-an-mvc-partial-view-with-ajax/
-        [HttpGet]
-        public async Task<ActionResult> UpdateGameBoard()
-        {
-            GBVM = await this.FullAndPartialViewModel();
-            return PartialView("_GameBoard", GBVM);
-        }
-        private async Task<GameBoardViewModel> FullAndPartialViewModel(int[,] matrix = null) // optional array param
-        {
-            // populate the viewModel and return it
-            return GBVM;
-        }
+        //// https://cmatskas.com/update-an-mvc-partial-view-with-ajax/
+        //[HttpGet]
+        //public async Task<ActionResult> UpdateGameBoard()
+        //{
+        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+
+        //    GBVM = await this.FullAndPartialViewModel();
+        //    return PartialView("_GameBoard", GBVM);
+        //}
+        //private async Task<GameBoardViewModel> FullAndPartialViewModel(int[,] matrix = null) // optional array param
+        //{
+        //    // populate the viewModel and return it
+
+        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+
+        //    return GBVM;
+        //}
         ///********************************/
 
 
         [HttpPost]
-        public async Task<ActionResult> Swipe( string direction = null)
+        public ActionResult Swipe( string direction = null) //async Task<ActionResult>
         {//List<int> cellValues,
             //int[] cellValArr = cellValues.ToArray();
             //int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
             //for (int i = 0; i < GBVM.BoardSize; i++)
             //    for (int j = 0; j < GBVM.BoardSize; j++)
             //        matrix[i, j] = cellValArr[i + j];
-
-
-            //GBVM = (int[,])HttpContext.Session["GameBoard"];
+            GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
 
             switch (direction)
             {
@@ -93,36 +101,42 @@ namespace Game2048.Controllers
                     GBVM.Matrix = _gameManager.SwipeRight(GBVM.Matrix);
                     break;
                 default:
-                    GBVM.Matrix = _gameManager.InitializeMatrix();
+                    //GBVM.Matrix = _gameManager.InitializeMatrix();
+                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  // it is null
                     break;
             }
             GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
-            string outcome = "";
+            
             if (GBVM.Score >= 2048)
             {
-                outcome = _gameManager.Win();
+                //GBVM.State = _gameManager.Win();
+                GBVM.State = "You Win!";
             }
 
             int count = _gameManager.GetNumEmptyCells(GBVM.Matrix);
             if (count == 0)
+            { 
                 if (_gameManager.CanBeSwiped(GBVM.Matrix))
-                    outcome = _gameManager.GameOver();
+                {
+                    //GBVM.State = _gameManager.GameOver();
+                    GBVM.State = "Game Over!";
+                }
+            }
 
-            GBVM.State = outcome;
+            _session.SetObjectAsJson("GameBoard", GBVM);
 
-            //HttpContext.Session["GameBoard"] = GBVM;
-            
             return PartialView("_GameBoard", GBVM);
         }
 
         [HttpPost]
         public ActionResult NewGame()
         {
+            GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+            //
             GBVM.Matrix = _gameManager.InitializeMatrix();
             if (GBVM.BestScore < GBVM.Score)
                 GBVM.BestScore = GBVM.Score;
             
-            //HttpContext.Session["GameBoard"] = GBVM;
 
             return PartialView("_GameBoard", GBVM);
         }
@@ -133,6 +147,7 @@ namespace Game2048.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
+            ViewBag.Message = HttpContext.Session.GetString("Test"); /////////////
             return View();
         }
 
@@ -154,4 +169,20 @@ namespace Game2048.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
+    ///////////////
+    //public static class SessionExtensions
+    //{
+    //    public static void SetObjectAsJson(this ISession session, string key, object value)
+    //    {
+    //        session.SetString(key, JsonConvert.SerializeObject(value));
+    //    }
+
+    //    public static T GetObjectFromJson<T>(this ISession session, string key)
+    //    {
+    //        var value = session.GetString(key);
+
+    //        return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+    //    }
+    //}
 }
