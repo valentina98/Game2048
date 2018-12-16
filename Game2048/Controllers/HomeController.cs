@@ -33,14 +33,15 @@ namespace Game2048.Controllers
             {
                 GBVM = new GameBoardViewModel();
                 GBVM.Matrix = _gameManager.InitializeMatrix();
-                _session.SetObjectAsJson("GameBoard", GBVM);
+                //_session.SetObjectAsJson("GameBoard", GBVM);
+                _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
+                //var value = _session.GetString("GameBoard");
             }
             else
             {
                 //https://stackoverflow.com/questions/44192365/jsonconvert-deserializeobjectienumerablebook
-                var value = _session.GetString("GameBoard");
-                var deserializedIenum = JsonConvert.DeserializeObject<IEnumerable<GameBoardViewModel>>(value);
-                GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+                GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
+                //GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
             }
             return View(GBVM);
         }
@@ -67,14 +68,16 @@ namespace Game2048.Controllers
 
 
         [HttpPost]
-        public ActionResult Swipe( string direction = null) //async Task<ActionResult>
+        public ActionResult Swipe(string direction = null) //async Task<ActionResult>
         {
-            GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+            //GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+            GameBoardViewModel GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
+
 
             switch (direction)
             {
                 case "up":
-                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix); 
+                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);
                     // GBVM is a global variable, type GameBoardViewModel
                     break;
                 case "down":
@@ -92,7 +95,7 @@ namespace Game2048.Controllers
                     break;
             }
             GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
-            
+
             if (GBVM.Score >= 2048)
             {
                 //GBVM.State = _gameManager.Win();
@@ -101,7 +104,7 @@ namespace Game2048.Controllers
 
             int count = _gameManager.GetNumEmptyCells(GBVM.Matrix);
             if (count == 0)
-            { 
+            {
                 if (_gameManager.CanBeSwiped(GBVM.Matrix))
                 {
                     //GBVM.State = _gameManager.GameOver();
@@ -109,24 +112,26 @@ namespace Game2048.Controllers
                 }
             }
 
-            _session.SetObjectAsJson("GameBoard", GBVM);
+            //_session.SetObjectAsJson("GameBoard", GBVM);
+            var value = _session.GetString("GameBoard");
+            GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(value);
 
             return PartialView("_GameBoard", GBVM);
         }
 
-        [HttpPost]
-        public ActionResult NewGame()
-        {
-            GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
-            //
-            GBVM.Matrix = _gameManager.InitializeMatrix();
-            if (GBVM.BestScore < GBVM.Score)
-                GBVM.BestScore = GBVM.Score;
-            
+        //[HttpPost]
+        //public ActionResult NewGame()
+        //{
+        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
+        //    //
+        //    GBVM.Matrix = _gameManager.InitializeMatrix();
+        //    if (GBVM.BestScore < GBVM.Score)
+        //        GBVM.BestScore = GBVM.Score;
 
-            return PartialView("_GameBoard", GBVM);
-        }
-  
+
+        //    return PartialView("_GameBoard", GBVM);
+        //}
+
 
 
         public IActionResult About()
@@ -155,27 +160,21 @@ namespace Game2048.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-
-    ///////////////
-    //public static class SessionExtensions
-    //{
-    //    public static void SetObjectAsJson(this ISession session, string key, object value)
-    //    {
-    //        session.SetString(key, JsonConvert.SerializeObject(value));
-    //    }
-
-    //    public static T GetObjectFromJson<T>(this ISession session, string key)
-    //    {
-    //        var value = session.GetString(key);
-
-    //        return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
-    //    }
-    //}
 }
+//    ///////////////
+//    public static class SessionExtensions
+//    {
+//        public static void SetObjectAsJson(this ISession session, string key, object value)
+//        {
+//            session.SetString(key, JsonConvert.SerializeObject(value));
+            
+//        }
 
-//List<int> cellValues,
-//int[] cellValArr = cellValues.ToArray();
-//int[,] matrix = new int[GBVM.BoardSize, GBVM.BoardSize];
-//for (int i = 0; i < GBVM.BoardSize; i++)
-//    for (int j = 0; j < GBVM.BoardSize; j++)
-//        matrix[i, j] = cellValArr[i + j];
+//        public static T GetObjectFromJson<T>(this ISession session, string key)
+//        {
+//            var value = session.GetString(key);
+
+//            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+//        }
+//    }
+//}

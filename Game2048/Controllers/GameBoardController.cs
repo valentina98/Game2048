@@ -29,11 +29,14 @@ namespace Game2048.Controllers
         GameBoardViewModel GBVM = new GameBoardViewModel();
         public void GbvmSessionSet(GameBoardViewModel GBVM)
         {
-            _session.SetObjectAsJson("GameBoardViewModel", GBVM);
+            //_session.SetObjectAsJson("GameBoardViewModel", GBVM);
+            _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
         }
         public void GbvmSessionGet()
         {
-            GBVM = _session.GetObjectFromJson<GameBoardViewModel>("GameBoardViewModel");
+            //GBVM = _session.GetObjectFromJson<GameBoardViewModel>("GameBoardViewModel");
+            var value = _session.GetString("GameBoard");
+            GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(value);
         }
 
         public void Initialize()
@@ -90,15 +93,8 @@ namespace Game2048.Controllers
             GbvmSessionSet(GBVM);
         }
 
-
-
-        /////////////
-        
-
-
-
-
-
+    }
+}
 
 
 
@@ -173,27 +169,26 @@ namespace Game2048.Controllers
 
         //    if (score >= 2048) GM.Win();
         //}
-    }
-    public static class SessionExtensions
-    {
-        public static void SetObjectAsJson(this ISession session, string key, object value)
-        {
-            session.SetString(key, JsonConvert.SerializeObject(value));
-        }
+    //}
+    //public static class SessionExtensions
+    //{
+    //    public static void SetObjectAsJson(this ISession session, string key, object value)
+    //    {
+    //        session.SetString(key, JsonConvert.SerializeObject(value));
+    //    }
 
-        public static T GetObjectFromJson<T>(this ISession session, string key)
-        {
-            var value = session.GetString(key);
+    //    public static T GetObjectFromJson<T>(this ISession session, string key)
+    //    {
+    //        var value = session.GetString(key);
 
-            //var deserializedList = JsonConvert.DeserializeObject<List<T>>(value);
-            var deserializedIenum = JsonConvert.DeserializeObject<IEnumerable<T>>(value);
+    //        //var deserializedList = JsonConvert.DeserializeObject<List<T>>(value);
+    //        var deserializedIenum = JsonConvert.DeserializeObject<IEnumerable<T>>(value);
 
-            return value == null ? default(T) :
-                JsonConvert.DeserializeObject<T>(value);
+    //        return value == null ? default(T) :
+    //            JsonConvert.DeserializeObject<T>(value);
 
-            
-            //deserialize "{\"BoardSize\":4,\"Matrix\":[[0,0,0,0],[0,0,2,0],[0,0,0,0],[2,0,0,0]],\"Score\":0,\"BestScore\":0,\"State\":\"\"}"
-        }
-    }
 
-}
+    //        //deserialize "{\"BoardSize\":4,\"Matrix\":[[0,0,0,0],[0,0,2,0],[0,0,0,0],[2,0,0,0]],\"Score\":0,\"BestScore\":0,\"State\":\"\"}"
+    //    }   //https://social.msdn.microsoft.com/Forums/vstudio/en-US/aa267e26-f5a1-4958-b4ae-e1b1dfff4390/extracting-part-of-json-object-from-json-string?forum=csharpgeneral&ranMID=24542&ranEAID=je6NUbpObpQ&ranSiteID=je6NUbpObpQ-LIXrxg0O9JpJQ7Yc_966uA&epi=je6NUbpObpQ-LIXrxg0O9JpJQ7Yc_966uA&irgwc=1&OCID=AID681541_aff_7593_1243925&tduid=(ir__hexm96t26kblgujfb32csir03u2xh3jorpihv16900)(7593)(1243925)(je6NUbpObpQ-LIXrxg0O9JpJQ7Yc_966uA)()&irclickid=_hexm96t26kblgujfb32csir03u2xh3jorpihv16900
+    //}
+    
