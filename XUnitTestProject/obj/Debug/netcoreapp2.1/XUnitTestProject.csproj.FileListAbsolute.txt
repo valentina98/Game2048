@@ -1,4 +1,3 @@
-D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.csprojAssemblyReference.cache
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.csproj.CoreCompileInputs.cache
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.AssemblyInfoInputs.cache
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.AssemblyInfo.cs

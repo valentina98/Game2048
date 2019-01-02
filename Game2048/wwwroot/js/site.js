@@ -2,20 +2,22 @@
 //https://www.aspsnippets.com/Articles/ASPNet-MVC-Call-Controller-Method-from-View-using-jQuery-AJAX.aspx
 
 $(".swipe").click(function () {
-    var direction = $(this).text();;
-    alert("your direction is : " + direction);
+    var direction = $(this).text();
+    //alert("your direction is : " + direction);
     $.ajax({
-        type: "post",
-        url: "/home/swipe",
-        data: '{name: "' + direction + '" }',
+        type: "POST",
+        url: "/Home/Swipe",
+        data: { "direction": direction},
+        dataType: "text",
         success: function (response) {
             ("$gameBoard").html(response);
+            //alert(direction);
         },
         failure: function (response) {
             alert("fail");
         },
         error: function (response) {
-            alert("error");
+            alert("error" + direction);
         }
     });
 })
@@ -23,7 +25,7 @@ $(".swipe").click(function () {
 
 $("#new-game").click(function () {
     $.ajax({
-        type: "post",
+        type: "POST",
         url: "/home/newgame",
         success: function (response) {
             //$("#message-box").text("New Game");

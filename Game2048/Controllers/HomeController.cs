@@ -27,8 +27,8 @@ namespace Game2048.Controllers
 
         public ActionResult Index()
         {
-
             GameBoardViewModel GBVM;
+
             if (_session.GetString("GameBoard") == null)
             {
                 GBVM = new GameBoardViewModel();
@@ -68,13 +68,11 @@ namespace Game2048.Controllers
 
 
         [HttpPost]
-        public ActionResult Swipe(string direction = null) //async Task<ActionResult>
+        public ActionResult Swipe(string direction) //async Task<ActionResult>
         {
-            //GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
             GameBoardViewModel GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
-
-
-            switch (direction)
+            
+                switch (direction)
             {
                 case "up":
                     GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);
@@ -91,7 +89,7 @@ namespace Game2048.Controllers
                     break;
                 default:
                     //GBVM.Matrix = _gameManager.InitializeMatrix();
-                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  // it is null
+                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  // it is null?
                     break;
             }
             GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
@@ -112,9 +110,8 @@ namespace Game2048.Controllers
                 }
             }
 
-            //_session.SetObjectAsJson("GameBoard", GBVM);
-            var value = _session.GetString("GameBoard");
-            GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(value);
+            _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
+           
 
             return PartialView("_GameBoard", GBVM);
         }
@@ -161,20 +158,3 @@ namespace Game2048.Controllers
         }
     }
 }
-//    ///////////////
-//    public static class SessionExtensions
-//    {
-//        public static void SetObjectAsJson(this ISession session, string key, object value)
-//        {
-//            session.SetString(key, JsonConvert.SerializeObject(value));
-            
-//        }
-
-//        public static T GetObjectFromJson<T>(this ISession session, string key)
-//        {
-//            var value = session.GetString(key);
-
-//            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
-//        }
-//    }
-//}
