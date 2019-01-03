@@ -26,7 +26,7 @@ $(".swipe").click(function () {
 $("#new-game").click(function () {
     $.ajax({
         type: "POST",
-        url: "/home/newgame",
+        url: "/Home/NewGame",
         success: function (response) {
             //$("#message-box").text("New Game");
             alert("New Game!");
