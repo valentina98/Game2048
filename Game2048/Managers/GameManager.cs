@@ -27,9 +27,7 @@ namespace Game2048.Managers
             Random rnd = new Random();
 
             int count = GetNumEmptyCells(matrix);
-            
             int rndEmptyCellNum = rnd.Next(0, count);
-            //matrix[0, 0] = rndEmptyCellNum;
 
             for (int i = 0; i < MatrixLenght; i++)
             {

@@ -1,8 +1,30 @@
 ﻿
-//https://www.aspsnippets.com/Articles/ASPNet-MVC-Call-Controller-Method-from-View-using-jQuery-AJAX.aspx
+$(document).keydown(function (e) { // keypress does not work for arrow keys
+    switch (e.which) {
+        case 37: // left
+            document.getElementById("swipe-left").click();
+            break;
 
+        case 38: // up
+            document.getElementById("swipe-up").click();
+            break;
+
+        case 39: // right
+            document.getElementById("swipe-right").click();
+            break;s
+
+        case 40: // down
+            document.getElementById("swipe-down").click();
+            break;
+
+        default: return; // exit this handler for other keys
+    }
+    //e.preventDefault(); // prevent the default action (scroll / move caret)
+});
+
+//https://www.aspsnippets.com/Articles/ASPNet-MVC-Call-Controller-Method-from-View-using-jQuery-AJAX.aspx
 $(".swipe").click(function () {
-    var direction = $(this).text();
+    var direction = $(this).val();
     //alert("your direction is : " + direction);
     $.ajax({
         type: "POST",
@@ -28,8 +50,8 @@ $("#new-game").click(function () {
         type: "POST",
         url: "/Home/NewGame",
         success: function (response) {
-            //$("#message-box").text("New Game");
-            alert("New Game!");
+            $("#gameBoard").html(response);
+            //alert("New Game!");
         },
         failure: function (response) {
             alert("fail");

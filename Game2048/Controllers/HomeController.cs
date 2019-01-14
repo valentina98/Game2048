@@ -63,10 +63,11 @@ namespace Game2048.Controllers
                     GBVM.Matrix = _gameManager.SwipeRight(GBVM.Matrix);
                     break;
                 default:
-                    //GBVM.Matrix = _gameManager.InitializeMatrix();
                     //GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  
                     break;
             }
+            _gameManager.AddNewDigit(GBVM.Matrix);
+
             GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
 
             if (GBVM.Score >= 2048)
@@ -90,18 +91,18 @@ namespace Game2048.Controllers
             return PartialView("_GameBoard", GBVM);
         }
 
-        //[HttpPost]
-        //public ActionResult NewGame()
-        //{
-        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
-        //    //
-        //    GBVM.Matrix = _gameManager.InitializeMatrix();
-        //    if (GBVM.BestScore < GBVM.Score)
-        //        GBVM.BestScore = GBVM.Score;
+        [HttpPost]
+        public ActionResult NewGame()
+        {
+            GameBoardViewModel GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
+            
+            GBVM.Matrix = _gameManager.InitializeMatrix();
+            if (GBVM.BestScore < GBVM.Score)
+                GBVM.BestScore = GBVM.Score;
 
 
-        //    return PartialView("_GameBoard", GBVM);
-        //}
+            return PartialView("_GameBoard", GBVM);
+        }
 
 
 
