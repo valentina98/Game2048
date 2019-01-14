@@ -30,7 +30,6 @@ namespace Game2048.Models
         [OnSerializing]
         internal void OnSerializingMethod(StreamingContext context)
         {
-
             for (int i = 0; i < BoardSize; i++)
                 for (int j = 0; j < BoardSize; j++)
                     MatrixStack.Push(Matrix[i, j]);
@@ -40,7 +39,6 @@ namespace Game2048.Models
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context)
         {
-            
             for (int i = 0; i < BoardSize; i++)
                 for (int j = 0; j < BoardSize; j++)
                     Matrix[i, j] = MatrixStack.Pop();
@@ -60,7 +58,6 @@ namespace Game2048.Models
             //_additionalData = new int[BoardSize, BoardSize];
             //_gameManager = gameManager;
             //_httpContextAccessor = httpContextAccessor;
-
         }
 
 

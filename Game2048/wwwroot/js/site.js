@@ -10,14 +10,14 @@ $(".swipe").click(function () {
         data: { "direction": direction},
         dataType: "text",
         success: function (response) {
-            ("$gameBoard").html(response);
+            $("#gameBoard").html(response);
             //alert(direction);
         },
         failure: function (response) {
-            alert("fail");
+            alert("fail, direction: " + direction);
         },
         error: function (response) {
-            alert("error" + direction);
+            alert("error, direction: " + direction);
         }
     });
 })

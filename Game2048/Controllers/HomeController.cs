@@ -31,41 +31,16 @@ namespace Game2048.Controllers
 
             if (_session.GetString("GameBoard") == null)
             {
-                GBVM = new GameBoardViewModel();
-                GBVM.Matrix = _gameManager.InitializeMatrix();
-                //_session.SetObjectAsJson("GameBoard", GBVM);
+                GBVM = new GameBoardViewModel() { Matrix = _gameManager.InitializeMatrix() };
                 _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
-                //var value = _session.GetString("GameBoard");
             }
             else
             {
                 //https://stackoverflow.com/questions/44192365/jsonconvert-deserializeobjectienumerablebook
                 GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
-                //GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
             }
             return View(GBVM);
         }
-
-        ///********************************/
-        //// https://cmatskas.com/update-an-mvc-partial-view-with-ajax/
-        //[HttpGet]
-        //public async Task<ActionResult> UpdateGameBoard()
-        //{
-        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
-
-        //    GBVM = await this.FullAndPartialViewModel();
-        //    return PartialView("_GameBoard", GBVM);
-        //}
-        //private async Task<GameBoardViewModel> FullAndPartialViewModel(int[,] matrix = null) // optional array param
-        //{
-        //    // populate the viewModel and return it
-
-        //    GameBoardViewModel GBVM = _session.GetObjectFromJson<GameBoardViewModel>("Gameboard");
-
-        //    return GBVM;
-        //}
-        ///********************************/
-
 
         [HttpPost]
         public ActionResult Swipe(string direction) //async Task<ActionResult>
@@ -89,7 +64,7 @@ namespace Game2048.Controllers
                     break;
                 default:
                     //GBVM.Matrix = _gameManager.InitializeMatrix();
-                    GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  // it is null?
+                    //GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  
                     break;
             }
             GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
@@ -111,8 +86,7 @@ namespace Game2048.Controllers
             }
 
             _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
-           
-
+            
             return PartialView("_GameBoard", GBVM);
         }
 
