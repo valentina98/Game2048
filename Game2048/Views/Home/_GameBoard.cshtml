@@ -14,14 +14,14 @@
                     @for (int j = 0; j < Model.BoardSize; j++)
                     {
                         <td class="box">
-                            <div class="content boardcell">
+                            <div class="content board-cell">
                                 @if (@Model.Matrix[i, j] != 0)
                                 {
                                     @Model.Matrix[i, j]
                                 }
                             </div>
                         </td>
-
+                        <!-- 
                         <input type="hidden" value=@Model.Matrix[i, j]> <!-- hidden inputs with the values -->
                     }
                 </tr>

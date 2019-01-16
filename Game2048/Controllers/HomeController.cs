@@ -87,7 +87,6 @@ namespace Game2048.Controllers
             }
 
             _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
-            
             return PartialView("_GameBoard", GBVM);
         }
 
@@ -99,8 +98,9 @@ namespace Game2048.Controllers
             GBVM.Matrix = _gameManager.InitializeMatrix();
             if (GBVM.BestScore < GBVM.Score)
                 GBVM.BestScore = GBVM.Score;
+            
 
-
+            _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
             return PartialView("_GameBoard", GBVM);
         }
 
