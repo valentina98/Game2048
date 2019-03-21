@@ -16,3 +16,4 @@ D:\documents\GitHub\Game2048\XUnitTestProject\bin\Debug\netcoreapp2.1\Game2048.p
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.csproj.CopyComplete
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.dll
 D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.pdb
+D:\documents\GitHub\Game2048\XUnitTestProject\obj\Debug\netcoreapp2.1\XUnitTestProject.csprojAssemblyReference.cache

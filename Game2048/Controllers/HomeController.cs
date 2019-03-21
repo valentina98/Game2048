@@ -46,8 +46,8 @@ namespace Game2048.Controllers
         public ActionResult Swipe(string direction) //async Task<ActionResult>
         {
             GameBoardViewModel GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
-            
-                switch (direction)
+            List<object> GBVMvaluesList = GBVM.Matrix.Cast<Object>().ToList();
+            switch (direction)
             {
                 case "up":
                     GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);
@@ -66,14 +66,20 @@ namespace Game2048.Controllers
                     //GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  
                     break;
             }
-            _gameManager.AddNewDigit(GBVM.Matrix);
 
-            GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
-
-            if (GBVM.Score >= 2048)
+            // if matrix has changed
+            if (!GBVMvaluesList.SequenceEqual(GBVM.Matrix.Cast<Object>().ToList()))
             {
-                //GBVM.State = _gameManager.Win();
-                GBVM.State = "You Win!";
+                GBVM.Matrix = _gameManager.AddNewDigit(GBVM.Matrix);
+
+                GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
+
+                if (GBVM.Score >= 2048)
+                {
+                    //GBVM.State = _gameManager.Win();
+                    GBVM.State = "You Win!";
+                }
+
             }
 
             int count = _gameManager.GetNumEmptyCells(GBVM.Matrix);

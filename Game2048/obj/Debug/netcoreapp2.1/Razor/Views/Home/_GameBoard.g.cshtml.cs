@@ -58,7 +58,7 @@ using Game2048.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(167, 884, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b872d334e7fc4fd0879098d456b80de5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f9fc17d8b27b4b7cb07ad646fa5987ec", async() => {
                 BeginContext(187, 79, true);
                 WriteLiteral("\r\n\r\n    <!--partial view-->\r\n    <table class=\"game-matrix\">\r\n        <tbody>\r\n");
                 EndContext();
