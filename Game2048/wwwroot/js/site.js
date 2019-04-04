@@ -70,12 +70,23 @@ $(".swipe").click(function () {
         url: "/Home/Swipe",
         data: { "direction": direction},
         dataType: "text",
-        success: function (response) {
+        success: function (response) { //alert(direction);
 
             $("#gameBoard").html(response);
-            //alert(direction);
 
             $('.board-cell').each(ChangeCellColor);
+
+            $('#state').replaceWith($('#state', data));
+
+            //$("#score").load($('#score', data));
+            //$("#score").load(div);
+            //$("#score").load(location.href + " #score>*", "");
+
+            $("#score").replaceWith($(" #score"));
+
+            $('#best').replaceWith($(' #best', data));
+
+            //document.load();
         },
         failure: function (response) {
             alert("fail, direction: " + direction);
@@ -94,6 +105,7 @@ $("#new-game").click(function () {
         success: function (response) {
             $("#gameBoard").html(response);
             //alert("New Game!");
+            $('.board-cell').each(ChangeCellColor);
         },
         failure: function (response) {
             alert("fail");

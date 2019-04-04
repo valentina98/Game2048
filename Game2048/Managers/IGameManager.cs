@@ -15,8 +15,7 @@ namespace Game2048.Managers
         int[,] SwipeUp(int[,] mx);
         int[,] SwipeDown(int[,] mx);
         int FindScore(int[,] mx);
-        string Win();
-        string GameOver();
+        bool CheckWin(int[,] mx);
         bool CanBeSwiped(int[,] mx);
         int GetNumEmptyCells(int[,] mx);
     }

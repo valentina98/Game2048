@@ -47,6 +47,7 @@ namespace Game2048.Managers
             }
             return matrix;
         }
+
         public int[,] SwipeLeft (int[,] matrix)
         {
             bool digitsAreSummed;
@@ -199,6 +200,7 @@ namespace Game2048.Managers
             }
             return matrix;
         }
+
         public int FindScore (int[,] matrix)
         {
             int score = 0;
@@ -206,27 +208,38 @@ namespace Game2048.Managers
             {
                 for (int j = 0; j < MatrixLenght; j++)
                 {
-                    if (matrix[i, j]>score)
-                    {
-                        score = matrix[i, j];
-                    }
+                    score += matrix[i, j];
                 }
             }
             return score;
         }
-        public string GameOver()
+
+        public bool CheckWin(int[,] matrix)
         {
-            return "Game Over!";
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
+                {
+                    if (matrix[i, j] == 2048) return true;
+                }
+            }
+            return false;
         }
-        public string Win()
-        {
-            return "You won!";
-        }
+
         public bool CanBeSwiped(int[,] matrix)
         {
-            if (matrix == SwipeDown(matrix) && matrix == SwipeUp(matrix) &&
-                matrix == SwipeLeft(matrix) && matrix == SwipeRight(matrix))
-                return false;
+            ///////////var mx = string.Join(matrix.Select(p => p.ToString()).ToArray())
+            var mxU = SwipeUp(matrix);
+            var mxD = SwipeDown(matrix);
+            var mxR = SwipeRight(matrix);
+            var mxL = SwipeLeft(matrix);
+
+            var allEqual = matrix.Cast<int>().SequenceEqual(mxU.Cast<int>()) &&
+                           matrix.Cast<int>().SequenceEqual(mxD.Cast<int>()) &&
+                           matrix.Cast<int>().SequenceEqual(mxR.Cast<int>()) &&
+                           matrix.Cast<int>().SequenceEqual(mxL.Cast<int>());
+
+            if (allEqual) return false;
             else return true;
         }
         public int GetNumEmptyCells(int[,] matrix)

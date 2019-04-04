@@ -11,17 +11,8 @@
         @{await Html.RenderPartialAsync("_GameBoard", Model);} <!--Html.RenderPartial-->
     </div>
 
-    <div class="data">
-        <div class="score" id="score">
-            Score<br />
-            <span>@Model.Score</span>
-        </div>
-        <div class="best" id="best">
-            Best <br />
-            <span>@Model.BestScore</span>
-        </div>
-        <button type="submit" class="button new-game" id="new-game">New Game</button>
-        <div class="game-over" id="message-box"> Game Over! </div>
+    <div id="data">
+        <button type="submit" class="button" id="new-game">New Game</button>
     </div>
 
     <div class="buttons">

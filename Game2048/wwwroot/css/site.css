@@ -108,7 +108,7 @@ body {
     margin: 2px;
 }
 /* DATA */
-.data {
+#data {
     text-align: left;
     position: absolute;
     margin: auto;
@@ -117,7 +117,7 @@ body {
     width: 30%;
 }
 
-.score, .best {
+#score, #best {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -129,11 +129,11 @@ body {
     margin: 15px 2px;
     padding: 5px 15px;
 }
-.new-game {
+#new-game {
     width: 50%;
     display: block;
 }
-.game-over {
+#state {
     font-size: 30px;
     margin: 30px 0;
 }
@@ -175,22 +175,22 @@ body {
         margin: 10px auto;
         width: 50%;
     }
-    .data {
+    #data {
         position: static;
         width: 100%;
     }
-    .score, .best {
+    #score, #best {
         display: inline-block;
         margin: 1%;
         width: 30%;
     }
 
-    .new-game {
+    #new-game {
         width: 30%;
         display: inline-block;
     }
 
-    .game-over {
+    #state {
         text-align: center;
     }
 }

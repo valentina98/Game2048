@@ -32,6 +32,12 @@ namespace Game2048.Controllers
             if (_session.GetString("GameBoard") == null)
             {
                 GBVM = new GameBoardViewModel() { Matrix = _gameManager.InitializeMatrix() };
+
+                GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
+                if (GBVM.BestScore > GBVM.Score)
+                {
+                    GBVM.BestScore = GBVM.Score;
+                }
                 _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
             }
             else
@@ -46,7 +52,7 @@ namespace Game2048.Controllers
         public ActionResult Swipe(string direction) //async Task<ActionResult>
         {
             GameBoardViewModel GBVM = JsonConvert.DeserializeObject<GameBoardViewModel>(_session.GetString("GameBoard"));
-            List<object> GBVMvaluesList = GBVM.Matrix.Cast<Object>().ToList();
+            List<object> GBVMoldValuesList = GBVM.Matrix.Cast<Object>().ToList();
             switch (direction)
             {
                 case "up":
@@ -67,30 +73,43 @@ namespace Game2048.Controllers
                     break;
             }
 
+            
+            if (_gameManager.GetNumEmptyCells(GBVM.Matrix) == 0)
+            {
+                if (!_gameManager.CanBeSwiped(GBVM.Matrix))
+                {
+                    //GBVM.State = _gameManager.GameOver();
+                    GBVM.State = "Game Over!";
+
+                    _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
+                    return PartialView("_GameBoard", GBVM);
+                }
+            }
+            if (_gameManager.CheckWin(GBVM.Matrix))
+            {
+                GBVM.State = "You win!";
+
+                _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
+                return PartialView("_GameBoard", GBVM);
+            }
+            //{
+            //GBVM.State = _gameManager.Win();
+            //GBVM.State = "You Win!";
+            //}
+
             // if matrix has changed
-            if (!GBVMvaluesList.SequenceEqual(GBVM.Matrix.Cast<Object>().ToList()))
+            if (!GBVMoldValuesList.SequenceEqual(GBVM.Matrix.Cast<Object>().ToList()))
             {
                 GBVM.Matrix = _gameManager.AddNewDigit(GBVM.Matrix);
 
                 GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
 
-                if (GBVM.Score >= 2048)
+                if (GBVM.BestScore < GBVM.Score)
                 {
-                    //GBVM.State = _gameManager.Win();
-                    GBVM.State = "You Win!";
-                }
-
-            }
-
-            int count = _gameManager.GetNumEmptyCells(GBVM.Matrix);
-            if (count == 0)
-            {
-                if (_gameManager.CanBeSwiped(GBVM.Matrix))
-                {
-                    //GBVM.State = _gameManager.GameOver();
-                    GBVM.State = "Game Over!";
+                    GBVM.BestScore = GBVM.Score;
                 }
             }
+
 
             _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
             return PartialView("_GameBoard", GBVM);
@@ -104,7 +123,15 @@ namespace Game2048.Controllers
             GBVM.Matrix = _gameManager.InitializeMatrix();
             if (GBVM.BestScore < GBVM.Score)
                 GBVM.BestScore = GBVM.Score;
-            
+
+            GBVM.Score = _gameManager.FindScore(GBVM.Matrix);
+
+            if (GBVM.BestScore < GBVM.Score)
+            {
+                GBVM.BestScore = GBVM.Score;
+            }
+
+            GBVM.State = "";
 
             _session.SetString("GameBoard", JsonConvert.SerializeObject(GBVM));
             return PartialView("_GameBoard", GBVM);
