@@ -6,7 +6,7 @@
 <form method="post">
 
     <!--partial view-->
-    <table class="game-matrix">
+    <table id="game-matrix">
         <tbody>
             @for (int i = 0; i < Model.BoardSize; i++)
             {
@@ -30,14 +30,16 @@
     </table>
 </form>
 
-<div id="data">
-    <div id="score">
-        Score<br />
-        <span>@Model.Score</span>
+<div class="left-bar">
+    <div>
+        <div id="score">
+            Score <br />
+            <span>@Model.Score</span>
+        </div>
+        <div id="best">
+            Best <br />
+            <span>@Model.BestScore</span>
+        </div>
     </div>
-    <div id="best">
-        Best <br />
-        <span>@Model.BestScore</span>
-    </div>
-    <div id="message-box"> @Model.State </div><!---->
+    <div id="state"> @Model.State </div><!---->
 </div>

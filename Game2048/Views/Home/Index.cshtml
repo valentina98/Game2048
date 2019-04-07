@@ -11,11 +11,11 @@
         @{await Html.RenderPartialAsync("_GameBoard", Model);} <!--Html.RenderPartial-->
     </div>
 
-    <div id="data">
-        <button type="submit" class="button" id="new-game">New Game</button>
+    <div class="left-bar">
+        <button type="submit" id="new-game">New Game</button>
     </div>
 
-    <div class="buttons">
+    <div class="right-bar">
         <button type="submit" class="button swipe" id="swipe-up" value="up">up</button>
         <br />
         <button type="submit" class="button swipe" id="swipe-left" value="left">left</button>

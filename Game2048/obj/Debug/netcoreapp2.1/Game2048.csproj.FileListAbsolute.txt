@@ -1,9 +1,3 @@
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.csproj.CoreCompileInputs.cache
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.RazorAssemblyInfo.cache
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.RazorAssemblyInfo.cs
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.AssemblyInfoInputs.cache
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.AssemblyInfo.cs
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.deps.json
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.runtimeconfig.json
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.runtimeconfig.dev.json
@@ -11,7 +5,12 @@ D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.dll
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.pdb
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.Views.dll
 D:\documents\GitHub\Game2048\Game2048\bin\Debug\netcoreapp2.1\Game2048.Views.pdb
-D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.csprojAssemblyReference.cache
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.csproj.CoreCompileInputs.cache
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.RazorAssemblyInfo.cache
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.RazorAssemblyInfo.cs
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.AssemblyInfoInputs.cache
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.AssemblyInfo.cs
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.TagHelpers.input.cache
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.TagHelpers.output.cache
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.RazorCoreGenerate.cache
