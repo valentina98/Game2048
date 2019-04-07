@@ -8,7 +8,7 @@ namespace Game2048.Managers
     public class GameManager : IGameManager
     {
         public const short MatrixLenght = 4;
-        public bool IsFool { get; set; } = false;
+        //public bool IsFool { get; set; } = false;
         public int[,] InitializeMatrix()
         {
             int[,] matrix = new int[MatrixLenght, MatrixLenght];
@@ -228,19 +228,39 @@ namespace Game2048.Managers
 
         public bool CanBeSwiped(int[,] matrix)
         {
-            ///////////var mx = string.Join(matrix.Select(p => p.ToString()).ToArray())
-            var mxU = SwipeUp(matrix);
-            var mxD = SwipeDown(matrix);
-            var mxR = SwipeRight(matrix);
-            var mxL = SwipeLeft(matrix);
+            int[,] mx = new int[MatrixLenght, MatrixLenght];
+            copyMatrix(matrix, mx);
+            string mxstr = matrixToString(mx);
 
-            var allEqual = matrix.Cast<int>().SequenceEqual(mxU.Cast<int>()) &&
-                           matrix.Cast<int>().SequenceEqual(mxD.Cast<int>()) &&
-                           matrix.Cast<int>().SequenceEqual(mxR.Cast<int>()) &&
-                           matrix.Cast<int>().SequenceEqual(mxL.Cast<int>());
+            int[,] mxU = new int[MatrixLenght, MatrixLenght];
+            copyMatrix(mx, mxU);
+            SwipeUp(mxU);
+            string mxUstr = matrixToString(mxU);
 
-            if (allEqual) return false;
-            else return true;
+            int[,] mxD = new int[MatrixLenght, MatrixLenght];
+            copyMatrix(mx, mxD);
+            SwipeDown(mxD);
+            string mxDstr = matrixToString(mxD);
+
+            
+            int[,] mxR = new int[MatrixLenght, MatrixLenght];
+            copyMatrix(mx, mxR);
+            SwipeRight(mxR);
+            string mxRstr = matrixToString(mxR);
+            
+            int[,] mxL = new int[MatrixLenght, MatrixLenght];
+            copyMatrix(mx, mxL);
+            SwipeLeft(mxL);
+            string mxLstr = matrixToString(mxL);
+            
+
+            bool notEqual = mxstr != mxUstr ||
+                           mxstr != mxDstr ||
+                           mxstr != mxRstr ||
+                           mxstr != mxLstr;
+
+            if (notEqual) return true;
+            else return false;
         }
         public int GetNumEmptyCells(int[,] matrix)
         {
@@ -266,6 +286,38 @@ namespace Game2048.Managers
             sq1 = sq2;
             sq2 = sq;
         }
-        
+        /*private bool checkMatrixEquality(int[,] mx1, int[,] mx2)
+        {
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
+                {
+                    if (mx1[i, j] != mx2[i, j]) return false;
+                }
+            }
+            return true;
+        }*/
+        private string matrixToString(int[,] mx)
+        {
+            string mxstr = "";
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
+                {
+                    mxstr += mx[i, j].ToString();
+                }
+            }
+            return mxstr;
+        }
+        private void copyMatrix(int[,] mx, int[,] mxCopy)
+        {
+            for (int i = 0; i < MatrixLenght; i++)
+            {
+                for (int j = 0; j < MatrixLenght; j++)
+                {
+                    mxCopy[i,j] = mx[i,j];
+                }
+            }
+        }
     }
 }

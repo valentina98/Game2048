@@ -72,7 +72,6 @@ namespace Game2048.Controllers
                     //GBVM.Matrix = _gameManager.SwipeUp(GBVM.Matrix);  
                     break;
             }
-
             
             if (_gameManager.GetNumEmptyCells(GBVM.Matrix) == 0)
             {

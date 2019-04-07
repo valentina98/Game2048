@@ -34,3 +34,4 @@ D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.Views.pdb
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.dll
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.pdb
 D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.csproj.CopyComplete
+D:\documents\GitHub\Game2048\Game2048\obj\Debug\netcoreapp2.1\Game2048.csprojAssemblyReference.cache
